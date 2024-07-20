@@ -24,18 +24,6 @@ interface Angle {
   yaw: number
 }
 export const DemoDashboard: FC = () => {
-  const [distance, setDistance] = useState<Distance>(
-    {
-      x: 0,
-      y: 0,
-      z: 0
-    }
-  );
-  const [angle, setAngle] = useState<Angle>({
-    roll: 0,
-    pitch: 0,
-    yaw: 0
-  });
   const {data, error, lastUpdated, isLoading, refetch} = useDroneTelemetry();
   if (isLoading) {  
     return <div>Loading...</div>;
@@ -50,6 +38,7 @@ export const DemoDashboard: FC = () => {
   }
   return (
     <>
+        {/**
       <div className="md:hidden">
         <Image
           src="/examples/dashboard-light.png"
@@ -66,6 +55,7 @@ export const DemoDashboard: FC = () => {
           className="hidden dark:block"
         />
       </div>
+         */}
       <div className="hidden flex-col md:flex">
         <div className="flex items-end justify-between space-y-2 mb-6">
           <h2 className="text-3xl leading-5 font-bold tracking-tight">
@@ -96,9 +86,9 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">X: {distance.x} {" "} Y: {distance.y} {" "} Z: {distance.z}$45,231.89</div>
+                <div className="text-2xl font-bold">X: {data.Distance_X} {" "} Y: {data.Distance_Y} {" "} Z: {data.Distance_Z}</div>
                 <p className="text-xs text-muted-foreground">
-                  {Math.pow(Math.pow(distance.x,2) + Math.pow(distance.y, 2) + Math.pow(distance.z, 2), 0.5)}
+                  {Math.pow(Math.pow(data.Distance_X,2) + Math.pow(data.Distance_Y, 2) + Math.pow(data.Distance_Z, 2), 0.5)}
                   distance convered in total
                 </p>
               </CardContent>
@@ -124,9 +114,9 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-xl font-bold">Roll: {angle.roll} {" "} pitch: {angle.pitch} {" "} yaw: {angle.yaw}</div>
+                <div className="text-xl font-bold">Roll: {data.Roll} {" "} pitch: {data.Pitch} {" "} yaw: {data.Yaw}</div>
                 <p className="text-xs text-muted-foreground">
-                  --- is the total angle of rotation
+                  {data.Roll_Rate}| {data.Pitch_Rate}| {data.Yaw_Rate} -  is the rate of rotation
                 </p>
               </CardContent>
             </Card>
@@ -148,7 +138,7 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{data?.Altitude}</div>
+                <div className="text-2xl font-bold">{data.Altitude}</div>
                 <p className="text-xs text-muted-foreground">
                   how high is it from the ground
                 </p>
