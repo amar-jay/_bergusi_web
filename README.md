@@ -1,4 +1,4 @@
-# Venefish 🐟
+# Bergusi 🐟
 
 ### Boilerplate for React TypeScript projects using Next.js, shadcn/ui, Tailwind and Firebase on Vercel!
 

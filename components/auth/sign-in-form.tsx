@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import * as React from "react";
 import {
@@ -67,7 +67,7 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input type="email" {...field} />
                 </FormControl>
@@ -80,7 +80,7 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Şifre</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -94,15 +94,15 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
         </form>
       </Form>
       <p className="mt-4 text-sm">
-        Forgot password?{" "}
+        Şifrenizi unutunuz mu?{" "}
         <Button variant="link" onClick={() => setIsResetOpen(true)}>
-          Reset
+          Resetleyin
         </Button>
       </p>
       <p className="text-sm">
-        Not a member?{" "}
+        {" "}
         <Button variant="link" onClick={onShowSignUp}>
-          Sign up instead.
+          Hesabı yok musun?
         </Button>
       </p>
       <ModalForgotPassword isOpen={isResetOpen} setIsOpen={setIsResetOpen} />

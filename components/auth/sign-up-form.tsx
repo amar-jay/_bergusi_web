@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import * as React from "react";
 import {
@@ -73,12 +73,12 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onShowLogin, onSignUp }) => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input type="email" {...field} />
                   </FormControl>
                   <FormDescription>
-                    A valid email is required to watch locked specials.
+                    Özel görünmek için geçerli bir e-posta adresi gereklidir
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -89,26 +89,26 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onShowLogin, onSignUp }) => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Şifre</FormLabel>
                   <FormControl>
                     <Input type="password" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Must be at least 8 characters long.
+                    En az 8 karakter uzunluğunda olmalıç
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Sign Up</Button>
+            <Button type="submit">Kaydol</Button>
           </fieldset>
         </form>
       </Form>
 
       <p className="mt-4 text-sm">
-        Already joined?{" "}
+        Zaten katıldınız mı?{" "}
         <Button variant="link" onClick={onShowLogin}>
-          Sign in instead.
+          Onun yerine oturum aç
         </Button>
       </p>
     </>

@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client"
+import { FC, useState } from "react";
 import Image from "next/image";
 import { MainNav } from "@/components/demo-dashboard/main-nav";
 import { RecentSales } from "@/components/demo-dashboard/recent-sales";
@@ -9,8 +10,44 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
+import { AlignLeft } from "lucide-react";
+import useDroneTelemetry from "@/lib/use-telemetry-data";
 
+interface Distance {
+  x:number
+  y:number
+  z:number
+}
+interface Angle {
+  roll: number
+  pitch: number
+  yaw: number
+}
 export const DemoDashboard: FC = () => {
+  const [distance, setDistance] = useState<Distance>(
+    {
+      x: 0,
+      y: 0,
+      z: 0
+    }
+  );
+  const [angle, setAngle] = useState<Angle>({
+    roll: 0,
+    pitch: 0,
+    yaw: 0
+  });
+  const {data, error, lastUpdated, isLoading, refetch} = useDroneTelemetry();
+  if (isLoading) {  
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!data) {
+    return <div>No data found</div>;
+  }
   return (
     <>
       <div className="md:hidden">
@@ -36,14 +73,14 @@ export const DemoDashboard: FC = () => {
           </h2>
         </div>
         <div className="flex h-16 items-center bg-muted px-6 rounded-xl">
-          <MainNav />
+          <MainNav refetch={refetch} lastUpdated={lastUpdated} />
         </div>
         <div className="flex-1 space-y-4 pt-6">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Total Revenue
+                  Total Distance Covered
                 </CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -59,16 +96,17 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">$45,231.89</div>
+                <div className="text-2xl font-bold">X: {distance.x} {" "} Y: {distance.y} {" "} Z: {distance.z}$45,231.89</div>
                 <p className="text-xs text-muted-foreground">
-                  +20.1% from last month
+                  {Math.pow(Math.pow(distance.x,2) + Math.pow(distance.y, 2) + Math.pow(distance.z, 2), 0.5)}
+                  distance convered in total
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Subscriptions
+                  Roll
                 </CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -86,15 +124,15 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+2350</div>
+                <div className="text-xl font-bold">Roll: {angle.roll} {" "} pitch: {angle.pitch} {" "} yaw: {angle.yaw}</div>
                 <p className="text-xs text-muted-foreground">
-                  +180.1% from last month
+                  --- is the total angle of rotation
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                <CardTitle className="text-sm font-medium">Altitude</CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -110,16 +148,16 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+12,234</div>
+                <div className="text-2xl font-bold">{data?.Altitude}</div>
                 <p className="text-xs text-muted-foreground">
-                  +19% from last month
+                  how high is it from the ground
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Active Now
+                  Battery
                 </CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -135,9 +173,35 @@ export const DemoDashboard: FC = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+573</div>
+                <div className="text-2xl font-bold">{data.Battery}</div>
                 <p className="text-xs text-muted-foreground">
-                  +201 since last hour
+                  Battery of the drone
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">
+                  Status
+                </CardTitle>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="h-4 w-4 text-muted-foreground"
+                >
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{data.Status}</div>
+                <p className="text-xs text-muted-foreground">
+                  Drone connection to server
                 </p>
               </CardContent>
             </Card>

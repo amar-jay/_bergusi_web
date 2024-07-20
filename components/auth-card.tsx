@@ -27,9 +27,9 @@ export const AuthCard = () => {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>{isShowingSignUp ? "Sign Up" : "Sign In"}</CardTitle>
+          <CardTitle>{isShowingSignUp ? "Kaydol" : "Giriş"}</CardTitle>
           <CardDescription>
-            Give them a reason to {isShowingSignUp ? "sign up" : "sign in"}.
+            Bergusi Drone App {isShowingSignUp ? "kaydol" : "giriş"} yapın
           </CardDescription>
         </CardHeader>
         <CardContent>
