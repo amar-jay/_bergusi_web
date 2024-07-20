@@ -1,46 +1,46 @@
-import Link from "next/link";
-import { Loader2Icon } from 'lucide-react'
+import { LoaderIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Dispatch, SetStateAction } from "react";
 
 interface MainNavProps extends React.HTMLAttributes<HTMLElement> {
-
-  refetch: () => {}
-  lastUpdated: string
+  refetch: () => {};
+  setCurrentPage: Dispatch<SetStateAction<string>>;
+  lastUpdated: string;
 }
 export function MainNav({
   className,
   refetch,
+  setCurrentPage,
   lastUpdated,
   ...props
 }: MainNavProps) {
   return (
     <nav
-      className={cn("flex items-center space-between", className)}
+      className={cn("w-full flex items-center justify-between", className)}
       {...props}
     >
-      <div
-      className={cn("flex items-center space-x-4 lg:space-x-6")}
-      >
-      <Link
-        href="#"
-        className="text-sm font-medium transition-colors hover:text-primary"
-      >
-        Overview
-      </Link>
-      <Link
-        href="#"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Settings
-      </Link>
+      <div className={cn("flex items-center space-x-4 lg:space-x-6")}>
+        <span
+          onClick={() => setCurrentPage("main")}
+          className="text-sm font-medium transition-colors hover:text-primary"
+        >
+          Overview
+        </span>
+        <span
+          onClick={() => setCurrentPage("settings")}
+          className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          Settings
+        </span>
       </div>
-      <div>
-      <span className="mr-6">
-        {lastUpdated}
-      </span>
-      <Loader2Icon className="w-6 h-6 text-primary hover:bg-muted-foreground rounded-lg" onClick={refetch} />
-</div>
+      <div className="mr-6 flex flex-row gap-3">
+        <span>{lastUpdated}</span>
+        <LoaderIcon
+          className="w-6 h-6 text-primary hover:ring-card cursor-pointer rounded-lg"
+          onClick={refetch}
+        />
+      </div>
     </nav>
   );
 }
