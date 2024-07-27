@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { MainNav } from "@/components/demo-dashboard/main-nav";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -8,6 +8,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import QRCode from "react-qr-code";
+import { fetchFromServer, fetchIp } from "@/lib/drone_requests";
 
 function BoxIcon(props: any) {
   return (
@@ -145,16 +146,49 @@ export const DemoDashboard: FC = () => {
 const DashboardSettings = () => {
   const [inputValue, setInputValue] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [currentIp, setCurrentIp] = useState("");
   const generateQrCode = () => {
     setQrCodeUrl(inputValue);
   };
+
+  const _fetchIp = async () => {
+    try {
+      const response = await fetchIp("http://127.0.0.1:5000");
+      /*
+      const newData: string = response.ok ? await response.json() : null;
+      if (!newData) {
+        throw new Error("Failed to fetch data");
+      }
+      */
+      setCurrentIp(response);
+    } catch (error) {
+      console.error("Error fetching current ip", error);
+    }
+  };
+
+  useEffect(() => {
+    _fetchIp(); // Fetch data immediately on mount
+
+    const intervalId = setInterval(_fetchIp, 50000);
+
+    return () => clearInterval(intervalId); // Clean up on unmount
+  }, []);
 
   return (
     <div className="flex-1 space-y-4 pt-6">
       <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-6 p-6 bg-background rounded-lg shadow-lg">
         <div className="w-full">
-          <Label htmlFor="input">Current IP Address</Label>
+          <Label htmlFor="input">Current Server IP Address</Label>
           <div className="flex items-center space-x-2">127.0.0.1</div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-6 p-6 bg-background rounded-lg shadow-lg">
+        <div className="w-full">
+          <Label htmlFor="input">Current Drone IP Address</Label>
+          <div className="flex items-center space-x-2">
+            {currentIp && "unknown"}
+          </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-6 p-6 bg-background rounded-lg shadow-lg">

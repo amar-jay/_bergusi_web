@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { fetchFromServer } from '../lib/drone_requests';
 
 export type DroneTelemetry = {
   Distance_X: number;
@@ -67,14 +68,16 @@ const useDroneTelemetry = (
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("/api/drone_telemetry");
+      const response = await fetchFromServer("http://127.0.0.1:5000");
+      /*
       const newData: DroneTelemetry = response.ok
         ? await response.json()
         : null;
       if (!newData) {
         throw new Error("Failed to fetch data");
       }
-      setData(newData);
+      */
+      setData(response);
     } catch (error) {
       console.error("Error fetching drone telemetry:", error);
       setError("Failed to fetch latest data. Please try again.");

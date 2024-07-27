@@ -1,13 +1,14 @@
 {
-  "name": "Bergusi",
-  "description": "Boilerplate & template for Vercel projects using Next.js, Firebase and shadcn/ui.",
-  "author": "Enesien Software <contact@enesien.com> (https://enesien.com)",
+  "name": "bergusi",
+  "description": "Bergusi Drone Dashboard and Control Panel",
+  "author": "Amar Jay <abdelmananjnr@gmail.com> (https://amarjay.vercel.app)",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint"
   },
   "dependencies": {

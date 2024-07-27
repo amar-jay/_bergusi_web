@@ -1,7 +1,5 @@
-// app/api/dashboard-data/route.js
-import { DroneTelemetry } from "@/lib/use-telemetry-data";
 import { NextRequest, NextResponse } from "next/server";
-import { fetchFromServer } from "@/lib/drone_requests";
+import { fetchIp } from "@/lib/drone_requests";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,16 +11,14 @@ export async function GET(request: NextRequest) {
       //  return NextResponse.json({ error: 'IP address is required' }, { status: 400 });
     }
 
-    const data: any = await fetchFromServer(ip);
+    let data: any = await fetchIp(ip);
     // set all floating point numbers to 2 decimal places
-    Object.keys(data).forEach((key) => {
-      if (typeof data[key] === "number") {
-        data[key] = data[key].toFixed(2);
-      }
-    });
+    if (!data) {
+      data = "unknown";
+    }
 
     // Create a NextResponse object
-    const response = NextResponse.json(data as DroneTelemetry);
+    const response = NextResponse.json(data);
 
     // Set cache control headers
     response.headers.set("Cache-Control", "no-store, max-age=0");
