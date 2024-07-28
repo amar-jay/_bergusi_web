@@ -29,7 +29,7 @@ interface UseDroneTelemetryResult {
   isLoading: boolean;
   lastUpdated: string;
   error: string | null;
-  refetch: (ip?: String) => Promise<void>;
+  refetch: (ip?: string) => Promise<void>;
 }
 
 const initialData: DroneTelemetry = {
@@ -62,7 +62,7 @@ const useDroneTelemetry = (
   const [lastUpdated, setLastUpdated] = useState(
     new Date().toLocaleTimeString(),
   );
-  const [ipAddress, setIpAddress] = useState<string>();
+  const [ipAddress, setIpAddress] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
@@ -98,10 +98,10 @@ const useDroneTelemetry = (
     return () => clearInterval(intervalId); // Clean up on unmount
   }, [interval]);
 
-  const refetch = async (ip?: String) => {
-    if (ip) {
+  const refetch = async (ip?: string) => {
+    if (!!ip) {
       console.log(ip);
-      setIpAddress(ip.toString());
+      setIpAddress(ip);
     }
     await fetchData();
   };

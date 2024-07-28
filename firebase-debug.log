@@ -1,69 +1,19 @@
-[debug] [2024-07-27T20:57:06.426Z] ----------------------------------------------------------------------
-[debug] [2024-07-27T20:57:06.431Z] Command:       /home/manan/.nvm/versions/node/v20.9.0/bin/node /home/manan/.nvm/versions/node/v20.9.0/bin/firebase deploy
-[debug] [2024-07-27T20:57:06.432Z] CLI Version:   13.13.3
-[debug] [2024-07-27T20:57:06.432Z] Platform:      linux
-[debug] [2024-07-27T20:57:06.433Z] Node Version:  v20.9.0
-[debug] [2024-07-27T20:57:06.433Z] Time:          Sat Jul 27 2024 23:57:06 GMT+0300 (GMT+03:00)
-[debug] [2024-07-27T20:57:06.433Z] ----------------------------------------------------------------------
+[debug] [2024-07-28T07:24:03.768Z] ----------------------------------------------------------------------
+[debug] [2024-07-28T07:24:03.789Z] Command:       /home/manan/.nvm/versions/node/v20.9.0/bin/node /home/manan/.nvm/versions/node/v20.9.0/bin/firebase deploy -f
+[debug] [2024-07-28T07:24:03.790Z] CLI Version:   13.13.3
+[debug] [2024-07-28T07:24:03.791Z] Platform:      linux
+[debug] [2024-07-28T07:24:03.791Z] Node Version:  v20.9.0
+[debug] [2024-07-28T07:24:03.791Z] Time:          Sun Jul 28 2024 10:24:03 GMT+0300 (GMT+03:00)
+[debug] [2024-07-28T07:24:03.791Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-07-27T20:57:06.440Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2024-07-27T20:57:06.611Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-07-27T20:57:06.611Z] > authorizing via signed-in user (abdmananjnr@gmail.com)
-[debug] [2024-07-27T20:57:06.612Z] [iam] checking project bergusi for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2024-07-27T20:57:06.613Z] > refreshing access token with scopes: []
-[debug] [2024-07-27T20:57:06.615Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2024-07-27T20:57:06.616Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-07-27T20:57:07.131Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2024-07-27T20:57:07.132Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-07-27T20:57:07.161Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions [none]
-[debug] [2024-07-27T20:57:07.162Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions x-goog-quota-user=projects/bergusi
-[debug] [2024-07-27T20:57:07.162Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-07-27T20:57:07.244Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2024-07-27T20:57:07.244Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[debug] [2024-07-27T20:58:26.393Z] ----------------------------------------------------------------------
-[debug] [2024-07-27T20:58:26.402Z] Command:       /home/manan/.nvm/versions/node/v20.9.0/bin/node /home/manan/.nvm/versions/node/v20.9.0/bin/firebase deploy
-[debug] [2024-07-27T20:58:26.403Z] CLI Version:   13.13.3
-[debug] [2024-07-27T20:58:26.403Z] Platform:      linux
-[debug] [2024-07-27T20:58:26.403Z] Node Version:  v20.9.0
-[debug] [2024-07-27T20:58:26.403Z] Time:          Sat Jul 27 2024 23:58:26 GMT+0300 (GMT+03:00)
-[debug] [2024-07-27T20:58:26.403Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2024-07-27T20:58:26.492Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-07-27T20:58:26.492Z] > authorizing via signed-in user (abdmananjnr@gmail.com)
-[debug] [2024-07-27T20:58:26.492Z] [iam] checking project bergusi for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2024-07-27T20:58:26.495Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions [none]
-[debug] [2024-07-27T20:58:26.495Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions x-goog-quota-user=projects/bergusi
-[debug] [2024-07-27T20:58:26.495Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-07-27T21:11:33.436Z] ----------------------------------------------------------------------
-[debug] [2024-07-27T21:11:33.450Z] Command:       /home/manan/.nvm/versions/node/v20.9.0/bin/node /home/manan/.nvm/versions/node/v20.9.0/bin/firebase deploy
-[debug] [2024-07-27T21:11:33.451Z] CLI Version:   13.13.3
-[debug] [2024-07-27T21:11:33.451Z] Platform:      linux
-[debug] [2024-07-27T21:11:33.451Z] Node Version:  v20.9.0
-[debug] [2024-07-27T21:11:33.451Z] Time:          Sun Jul 28 2024 00:11:33 GMT+0300 (GMT+03:00)
-[debug] [2024-07-27T21:11:33.451Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2024-07-27T21:11:33.547Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-07-27T21:11:33.548Z] > authorizing via signed-in user (abdmananjnr@gmail.com)
-[debug] [2024-07-27T21:11:33.548Z] [iam] checking project bergusi for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2024-07-27T21:11:33.551Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions [none]
-[debug] [2024-07-27T21:11:33.551Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions x-goog-quota-user=projects/bergusi
-[debug] [2024-07-27T21:11:33.552Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-07-27T22:00:01.879Z] ----------------------------------------------------------------------
-[debug] [2024-07-27T22:00:01.919Z] Command:       /home/manan/.nvm/versions/node/v20.9.0/bin/node /home/manan/.nvm/versions/node/v20.9.0/bin/firebase deploy
-[debug] [2024-07-27T22:00:01.920Z] CLI Version:   13.13.3
-[debug] [2024-07-27T22:00:01.920Z] Platform:      linux
-[debug] [2024-07-27T22:00:01.920Z] Node Version:  v20.9.0
-[debug] [2024-07-27T22:00:01.920Z] Time:          Sun Jul 28 2024 01:00:01 GMT+0300 (GMT+03:00)
-[debug] [2024-07-27T22:00:01.921Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2024-07-27T22:00:02.159Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-07-27T22:00:02.160Z] > authorizing via signed-in user (abdmananjnr@gmail.com)
-[debug] [2024-07-27T22:00:02.160Z] [iam] checking project bergusi for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2024-07-27T22:00:02.162Z] > refreshing access token with scopes: []
-[debug] [2024-07-27T22:00:02.165Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2024-07-27T22:00:02.165Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-07-27T22:00:02.915Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2024-07-27T22:00:02.916Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-07-27T22:00:02.937Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions [none]
-[debug] [2024-07-27T22:00:02.937Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions x-goog-quota-user=projects/bergusi
-[debug] [2024-07-27T22:00:02.937Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-07-28T07:24:04.070Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-07-28T07:24:04.071Z] > authorizing via signed-in user (abdmananjnr@gmail.com)
+[debug] [2024-07-28T07:24:04.071Z] [iam] checking project bergusi for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-07-28T07:24:04.074Z] > refreshing access token with scopes: []
+[debug] [2024-07-28T07:24:04.077Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-07-28T07:24:04.079Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-28T07:24:04.635Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-07-28T07:24:04.636Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-28T07:24:04.656Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions [none]
+[debug] [2024-07-28T07:24:04.656Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions x-goog-quota-user=projects/bergusi
+[debug] [2024-07-28T07:24:04.656Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bergusi:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}

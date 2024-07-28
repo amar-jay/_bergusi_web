@@ -20,12 +20,18 @@ export const NavBar: FC = () => {
             </Link>
             <div className="hidden md:flex justify-between grow">
               <div>
-                <Link href="/about-us" className={buttonVariants({ variant: "link" })}>
-                   About us
+                <Link
+                  href="/about-us"
+                  className={buttonVariants({ variant: "link" })}
+                >
+                  About us
                 </Link>
 
-                <Link href="#" className={buttonVariants({ variant: "link" })}>
-                  Download App 
+                <Link
+                  href="/download"
+                  className={buttonVariants({ variant: "link" })}
+                >
+                  Download App
                 </Link>
               </div>
               <div className="flex items-center space-x-4">
