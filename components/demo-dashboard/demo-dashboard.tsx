@@ -8,7 +8,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import QRCode from "react-qr-code";
-import { fetchFromServer, fetchIp } from "@/lib/drone_requests";
+import { IpReturnType } from "@/lib/drone_requests";
 
 function BoxIcon(props: any) {
   return (
@@ -33,6 +33,7 @@ function BoxIcon(props: any) {
 
 export const DemoDashboard: FC = () => {
   const [currentPage, setCurrentPage] = useState("main");
+  const [ip, setIp] = useState<string>("");
   const { data, error, lastUpdated, isLoading, refetch } = useDroneTelemetry();
   if (isLoading) {
     return (
@@ -66,10 +67,18 @@ export const DemoDashboard: FC = () => {
             persists.
             <pre>{error}</pre>
           </p>
+          <div className="flex flex-row items-center justify-center space-x-4">
+            <Input
+              placeholder="reset Ip Address"
+              value={ip}
+              onChange={(e) => setIp(e.target.value)}
+            />
+            <Button onClick={() => refetch(ip)}>Reset IP</Button>
+          </div>
           <div className="mt-6">
             <span
               className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              onClick={refetch}
+              onClick={() => refetch()}
             >
               Reload Page
             </span>
@@ -94,7 +103,7 @@ export const DemoDashboard: FC = () => {
           <div className="mt-6">
             <span
               className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              onClick={refetch}
+              onClick={() => refetch()}
             >
               Reload Page
             </span>
@@ -136,14 +145,14 @@ export const DemoDashboard: FC = () => {
             lastUpdated={lastUpdated}
           />
         </div>
-        {currentPage == "settings" && <DashboardSettings />}
+        {currentPage == "settings" && <DashboardSettings ip={ip} />}
         {currentPage == "main" && <DashboardMain data={data} />}
       </div>
     </>
   );
 };
 
-const DashboardSettings = () => {
+const DashboardSettings = ({ ip }: { ip: string }) => {
   const [inputValue, setInputValue] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [currentIp, setCurrentIp] = useState("");
@@ -153,14 +162,14 @@ const DashboardSettings = () => {
 
   const _fetchIp = async () => {
     try {
-      const response = await fetchIp("http://127.0.0.1:5000");
-      /*
-      const newData: string = response.ok ? await response.json() : null;
+      const response = await fetch(`/api/current_ip${ip ? `?ip=${ip}` : ""}`);
+      const newData: IpReturnType = response.ok ? await response.json() : null;
       if (!newData) {
         throw new Error("Failed to fetch data");
       }
-      */
-      setCurrentIp(response);
+      console.log(JSON.stringify(newData));
+
+      setCurrentIp(newData["ip_address"]);
     } catch (error) {
       console.error("Error fetching current ip", error);
     }
@@ -172,22 +181,24 @@ const DashboardSettings = () => {
     const intervalId = setInterval(_fetchIp, 50000);
 
     return () => clearInterval(intervalId); // Clean up on unmount
-  }, []);
+  }, [ip]);
 
   return (
     <div className="flex-1 space-y-4 pt-6">
       <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-6 p-6 bg-background rounded-lg shadow-lg">
         <div className="w-full">
           <Label htmlFor="input">Current Server IP Address</Label>
-          <div className="flex items-center space-x-2">127.0.0.1</div>
+          <div className="flex items-center space-x-2">
+            {!!ip ? ip : "127.0.0.1"}
+          </div>
         </div>
       </div>
 
       <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-6 p-6 bg-background rounded-lg shadow-lg">
         <div className="w-full">
-          <Label htmlFor="input">Current Drone IP Address</Label>
+          <Label htmlFor="input">Current Drone UDP Address</Label>
           <div className="flex items-center space-x-2">
-            {currentIp && "unknown"}
+            {!!currentIp ? currentIp : "unknown"}
           </div>
         </div>
       </div>

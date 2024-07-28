@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     let ip = searchParams.get("ip");
 
     if (!ip) {
-      ip = "http://127.0.0.1:5000";
+      ip = "172.31.173.220";
       //  return NextResponse.json({ error: 'IP address is required' }, { status: 400 });
     }
 

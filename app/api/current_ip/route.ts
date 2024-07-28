@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchIp } from "@/lib/drone_requests";
+import { fetchIp, IpReturnType } from "@/lib/drone_requests";
 
 export async function GET(request: NextRequest) {
   try {
@@ -7,15 +7,14 @@ export async function GET(request: NextRequest) {
     let ip = searchParams.get("ip");
 
     if (!ip) {
-      ip = "http://127.0.0.1:5000";
+      //      ip = "127.0.0.1";
+      ip = "172.31.173.220";
       //  return NextResponse.json({ error: 'IP address is required' }, { status: 400 });
     }
+    console.log(ip);
 
-    let data: any = await fetchIp(ip);
+    let data: IpReturnType = await fetchIp(ip);
     // set all floating point numbers to 2 decimal places
-    if (!data) {
-      data = "unknown";
-    }
 
     // Create a NextResponse object
     const response = NextResponse.json(data);

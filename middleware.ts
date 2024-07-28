@@ -11,10 +11,11 @@ export function middleware(req: NextRequest) {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS",
   ); // Allow all methods
-  responseHeaders.set(
+  responseHeaders.append(
     "Access-Control-Allow-Headers",
-    "Content-Type, Authorization",
-  ); // Allow necessary headers
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+  );
+
   responseHeaders.set("Access-Control-Allow-Credentials", "true");
 
   // Handle preflight requests
@@ -33,8 +34,9 @@ export function middleware(req: NextRequest) {
   );
   response.headers.append(
     "Access-Control-Allow-Headers",
-    "Content-Type, Authorization",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
   );
+
   response.headers.append("Access-Control-Allow-Credentials", "true");
 
   return response;

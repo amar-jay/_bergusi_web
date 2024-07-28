@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchFromServer } from '../lib/drone_requests';
+import { fetchFromServer } from "../lib/drone_requests";
 
 export type DroneTelemetry = {
   Distance_X: number;
@@ -29,7 +29,7 @@ interface UseDroneTelemetryResult {
   isLoading: boolean;
   lastUpdated: string;
   error: string | null;
-  refetch: () => Promise<void>;
+  refetch: (ip?: String) => Promise<void>;
 }
 
 const initialData: DroneTelemetry = {
@@ -62,22 +62,25 @@ const useDroneTelemetry = (
   const [lastUpdated, setLastUpdated] = useState(
     new Date().toLocaleTimeString(),
   );
+  const [ipAddress, setIpAddress] = useState<string>();
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetchFromServer("http://127.0.0.1:5000");
-      /*
+      //const response = await fetchFromServer("http://" + ipAddress + ":5000");
+      const response = await fetch(
+        `/api/drone_telemetry${ipAddress ? `?ip=${ipAddress}` : ""}`,
+      );
+
       const newData: DroneTelemetry = response.ok
         ? await response.json()
         : null;
       if (!newData) {
         throw new Error("Failed to fetch data");
       }
-      */
-      setData(response);
+      setData(newData);
     } catch (error) {
       console.error("Error fetching drone telemetry:", error);
       setError("Failed to fetch latest data. Please try again.");
@@ -95,7 +98,11 @@ const useDroneTelemetry = (
     return () => clearInterval(intervalId); // Clean up on unmount
   }, [interval]);
 
-  const refetch = async () => {
+  const refetch = async (ip?: String) => {
+    if (ip) {
+      console.log(ip);
+      setIpAddress(ip.toString());
+    }
     await fetchData();
   };
 
