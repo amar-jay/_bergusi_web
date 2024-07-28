@@ -304,7 +304,7 @@ const DashboardMain = ({ data }: { data: DroneTelemetry }) => (
         <CardContent>
           <div className="text-lg grid grid-cols-3 gap-2">
             <span>
-              <span className="font-bold">Row</span> {data.Roll}
+              <span className="font-bold">Roll</span> {data.Roll}
             </span>
             <span>
               <span className="font-bold">Pitch</span> {data.Pitch}
